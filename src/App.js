@@ -9,8 +9,14 @@ export default class App extends Component {
     tasks: [],
     current_group: 0
   }
+  
+  async componentDidMount(){
+    const task_JSON = await fetch('http://localhost:3000/data.json')
+    const task_data = await task_JSON.json()
+    this.setState({tasks: task_data})
+  }
 
   render() {
-    return this.state.current_group !== 0? <AllTasks></AllTasks> : <TaskGroup group_id={this.state.current_group}></TaskGroup>
+    return this.state.current_group === 0? <AllTasks tasks={this.state.tasks}></AllTasks> : <TaskGroup group_id={this.state.current_group}></TaskGroup>
   }
 }
