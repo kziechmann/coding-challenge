@@ -5,26 +5,26 @@ export default class AllTasks extends Component {
   
 
   render() {
-    return <div>
+    return <div className='container'>
                 <h1> Things To Do </h1>
                 <hr></hr>
-                <ul>{Object.keys(this.props.tasks).map(group=>{
+                {Object.keys(this.props.tasks).map(group=>{
 
                     const tasksInGroup = this.props.tasks[group].length
                     const tasksCompleted = this.props.tasks[group].reduce(
                         (completed,task)=>task.completedAt? completed+1: completed,0)
                         
-                    return <li>
+                    return (<span>
                                 <TaskGroup 
                                     group={group} 
                                     completed={tasksCompleted} 
                                     inGroup={tasksInGroup} 
                                     expandGroup={this.props.expandGroup}
-                                />
-                            </li>
+                                />        
+                                <hr></hr> 
+                            </span>)
                     }
-                    
-                )}</ul>
+                    )} 
             </div>
         
   }

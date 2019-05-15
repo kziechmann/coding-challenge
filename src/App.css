@@ -1,0 +1,71 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+
+h1{
+    font-weight: 100;
+}
+
+h2{
+    font-weight: 500;
+    margin: 5;
+}
+
+hr{
+    size: 10px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+  }
+
+span{
+    line-height: 0;
+	display:inline-block;
+	vertical-align: top;
+	width:70vw;
+}
+
+.group{
+    display: inline-block;
+    padding: 5px;
+}
+
+.container{
+    grid-column: 2 / 8;
+    grid-row: 2 / 6;
+}
+
+.task{
+    display: inline-block;
+    padding: 0px;
+}
+
+p{
+    padding-top:5px;
+    color: darkgrey;
+}
+
+.completed{
+    text-decoration: line-through;
+}
+
+.home{
+    float: right;
+    color: #0000EE;
+    margin-top: -15px;
+}
+
+.icon{
+    margin-top: -10px;
+    vertical-align: middle;
+    margin-right: 25px;
+}
+
+ul{
+    list-style-type:none
+}

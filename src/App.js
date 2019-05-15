@@ -15,7 +15,8 @@ export default class App extends Component {
     this.setState({current_group: group})
   }
 
-  allGroups = () =>{
+  allGroups = (e) =>{
+    e.preventDefault()
     this.setState({current_group: null})
   }
   
@@ -37,6 +38,6 @@ export default class App extends Component {
     } else {
       componentToRender = <GroupExpanded tasks={this.state.tasks} group={this.state.current_group} allGroups={this.allGroups}/>
     }
-    return componentToRender
+    return <div className='grid'>{componentToRender}</div>
   }
 }
