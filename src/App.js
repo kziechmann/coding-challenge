@@ -13,7 +13,12 @@ export default class App extends Component {
   async componentDidMount(){
     const task_JSON = await fetch('http://localhost:3000/data.json')
     const task_data = await task_JSON.json()
-    this.setState({tasks: task_data})
+    const tasks_grouped = task_data.reduce((groups,task)=>{
+      if(groups[task.group]) groups[task.group].push(task)
+      else groups[task.group] = [task]
+      return groups
+    },{})
+    this.setState({tasks: tasks_grouped})
   }
 
   render() {
