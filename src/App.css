@@ -69,3 +69,7 @@ p{
 ul{
     list-style-type:none
 }
+
+.clickable {
+    cursor: pointer;
+}

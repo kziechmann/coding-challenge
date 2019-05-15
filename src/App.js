@@ -7,7 +7,7 @@ import './App.css'
 
 export default class App extends Component {
   state = {
-    tasks: [],
+    tasks: {},
     current_group: null
   }
 
@@ -18,6 +18,21 @@ export default class App extends Component {
   allGroups = (e) =>{
     e.preventDefault()
     this.setState({current_group: null})
+  }
+
+  completeTask=(group, task)=>{
+    let tasks = this.state.tasks
+    const index = tasks[group].findIndex(item=>item.task == task)
+    const toComplete = tasks[group][index]
+   
+    if(!toComplete.dependencyIds.length){
+      tasks[group][index].completedAt = Date.now()
+      tasks[group] = tasks[group].map(item=>{
+        item.dependencyIds = [...item.dependencyIds].filter(id=>id != toComplete.id)
+        return item
+      })
+      this.setState({tasks})
+    }
   }
   
   async componentDidMount(){
@@ -34,9 +49,17 @@ export default class App extends Component {
   render() {
     let componentToRender
     if(!this.state.current_group){
-      componentToRender = <AllTasks tasks={this.state.tasks} expandGroup={this.expandGroup}/>
+      componentToRender = <AllTasks 
+                            tasks={this.state.tasks} 
+                            expandGroup={this.expandGroup}
+                          />
     } else {
-      componentToRender = <GroupExpanded tasks={this.state.tasks} group={this.state.current_group} allGroups={this.allGroups}/>
+      componentToRender = <GroupExpanded 
+                            tasks={this.state.tasks} 
+                            group={this.state.current_group} 
+                            allGroups={this.allGroups}
+                            completeTask={this.completeTask}
+                          />
     }
     return <div className='grid'>{componentToRender}</div>
   }
