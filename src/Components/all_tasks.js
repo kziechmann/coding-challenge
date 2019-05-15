@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
-
+import TaskGroup from './task_group';
 
 export default class AllTasks extends Component {
+  
+
   render() {
     return <div>
                 <h1> Things To Do </h1>
                 <hr></hr>
-                <ol>{Object.keys(this.props.tasks).map(item=>{
-                    const tasksInGroup = this.props.tasks[item].length
-                    const tasksCompleted = this.props.tasks[item].reduce(
+                <ol>{Object.keys(this.props.tasks).map(group=>{
+
+                    const tasksInGroup = this.props.tasks[group].length
+                    const tasksCompleted = this.props.tasks[group].reduce(
                         (completed,task)=>task.completedAt? completed+1: completed,0)
-                    return(<div>
-                        <h2>{`Task Group: ${item}`}</h2>
-                        <p>{`${tasksCompleted} OF ${tasksInGroup} COMPLETE`}</p>
-                        <hr></hr>
-                    </div>
-                    )}
+                        
+                    return <TaskGroup group={group} completed={tasksCompleted} inGroup={tasksInGroup}/>}
+                    
                 )}</ol>
             </div>
         
