@@ -8,7 +8,15 @@ import './App.css'
 export default class App extends Component {
   state = {
     tasks: [],
-    current_group: 0
+    current_group: null
+  }
+
+  expandGroup = (group) =>{
+    this.setState({current_group: group})
+  }
+
+  allGroups = () =>{
+    this.setState({current_group: null})
   }
   
   async componentDidMount(){
@@ -23,6 +31,12 @@ export default class App extends Component {
   }
 
   render() {
-    return this.state.current_group === 0? <AllTasks tasks={this.state.tasks}></AllTasks> : <GroupExpanded group_id={this.state.current_group}></GroupExpanded>
+    let componentToRender
+    if(!this.state.current_group){
+      componentToRender = <AllTasks tasks={this.state.tasks} expandGroup={this.expandGroup}/>
+    } else {
+      componentToRender = <GroupExpanded tasks={this.state.tasks} group={this.state.current_group} allGroups={this.allGroups}/>
+    }
+    return componentToRender
   }
 }

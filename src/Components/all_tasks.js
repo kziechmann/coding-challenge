@@ -8,15 +8,23 @@ export default class AllTasks extends Component {
     return <div>
                 <h1> Things To Do </h1>
                 <hr></hr>
-                <ol>{Object.keys(this.props.tasks).map(group=>{
+                <ul>{Object.keys(this.props.tasks).map(group=>{
 
                     const tasksInGroup = this.props.tasks[group].length
                     const tasksCompleted = this.props.tasks[group].reduce(
                         (completed,task)=>task.completedAt? completed+1: completed,0)
                         
-                    return <TaskGroup group={group} completed={tasksCompleted} inGroup={tasksInGroup}/>}
+                    return <li>
+                                <TaskGroup 
+                                    group={group} 
+                                    completed={tasksCompleted} 
+                                    inGroup={tasksInGroup} 
+                                    expandGroup={this.props.expandGroup}
+                                />
+                            </li>
+                    }
                     
-                )}</ol>
+                )}</ul>
             </div>
         
   }
